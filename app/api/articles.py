@@ -3,10 +3,15 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.db.database import get_db
-from app.models.article import Article
-from app.schemas.article import ArticleCreate, ArticleResponse
+from app.schemas.article import (
+    ArticleCreate,
+    ArticleEnrichmentResponse,
+    ArticleResponse,
+)
 from app.services.article_service import (
+    bulk_create_articles,
     create_article,
+    enrich_article,
     get_articles
 )
 
@@ -31,26 +36,9 @@ def create_bulk(
     articles: List[ArticleCreate],
     db: Session = Depends(get_db)
 ):
-    inserted = 0
-    skipped = 0
-    results = []
+    return bulk_create_articles(db, articles)
 
-    for article in articles:
-        existing = db.query(Article).filter(Article.url == article.url).first()
 
-        if existing:
-            skipped += 1
-            results.append(existing)
-            continue
-
-        db_article = create_article(db, article)
-
-        inserted += 1
-        results.append(db_article)
-
-    return {
-        "inserted": inserted,
-        "skipped": skipped,
-        "total": len(articles),
-        "data": results
-    }
+@router.post("/{article_id}/enrich", response_model=ArticleEnrichmentResponse)
+def enrich(article_id: int, db: Session = Depends(get_db)):
+    return enrich_article(db, article_id)
