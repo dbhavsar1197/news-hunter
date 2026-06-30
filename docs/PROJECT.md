@@ -40,29 +40,34 @@ Lessons Learned
 
 # Milestone 2
 
-In Progress
+## Milestone 2 - Database Foundation ✅
 
-Goal
+Completed:
 
-Backend Foundation
+- FastAPI running on Oracle Cloud VM
+- Dockerized application
+- PostgreSQL 16 running in Docker
+- SQLAlchemy configured
+- Environment variables configured
+- Article model created
+- articles table automatically created
+- Local development workflow established
 
-Tasks
+Development workflow:
 
-- PostgreSQL
-- SQLAlchemy
-- Alembic
-- Environment Variables
-- Database Connection
+Mac
+↓
+GitHub
+↓
+Oracle VM
+↓
+Docker Compose
+↓
+FastAPI + PostgreSQL
 
-Status
-
-⬜ PostgreSQL
-
-⬜ SQLAlchemy
-
-⬜ Alembic
-
-⬜ Database Models
+Status:
+Backend foundation complete.
+Ready to implement CRUD APIs.
 
 ---
 
