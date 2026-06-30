@@ -23,3 +23,6 @@ htmlcov/
 
 # Python packaging
 *.egg-info/
+
+#environment variables
+.env
