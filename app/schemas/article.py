@@ -1,5 +1,6 @@
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict
+
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class ArticleCreate(BaseModel):
@@ -9,6 +10,12 @@ class ArticleCreate(BaseModel):
     summary: str | None = None
     category: str | None = None
     published_at: datetime | None = None
+    ai_summary: str | None = None
+    ai_category: str | None = None
+    keywords: list[str] | None = None
+    sentiment: str | None = None
+    importance_score: float | None = None
+    processed_at: datetime | None = None
 
 
 class ArticleResponse(BaseModel):
@@ -20,5 +27,22 @@ class ArticleResponse(BaseModel):
     category: str | None = None
     published_at: datetime | None = None
     created_at: datetime
+    ai_summary: str | None = None
+    ai_category: str | None = None
+    keywords: list[str] | None = None
+    sentiment: str | None = None
+    importance_score: float | None = None
+    processed_at: datetime | None = None
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class ArticleEnrichmentResponse(BaseModel):
+    ai_summary: str | None = None
+    ai_category: str | None = None
+    keywords: list[str] = Field(default_factory=list)
+    sentiment: str | None = None
+    importance_score: float | None = None
+    processed_at: datetime | None = None
 
     model_config = ConfigDict(from_attributes=True)

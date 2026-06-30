@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime
+from sqlalchemy import Column, Integer, String, Text, DateTime, Float, JSON
 from sqlalchemy.sql import func
 
 from app.db.database import Base
@@ -15,3 +15,9 @@ class Article(Base):
     category = Column(String(100), nullable=True)
     published_at = Column(DateTime, nullable=True)
     created_at = Column(DateTime, server_default=func.now())
+    ai_summary = Column(Text, nullable=True)
+    ai_category = Column(String(100), nullable=True)
+    keywords = Column(JSON, nullable=True)
+    sentiment = Column(String(50), nullable=True)
+    importance_score = Column(Float, nullable=True)
+    processed_at = Column(DateTime, nullable=True)
